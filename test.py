@@ -2,7 +2,7 @@ import turtle
 from tkinter import *
 
 root = Tk()
-root.title('单线图绘制-By周啸天')
+root.title('单线图绘制-By avebest')
 root.geometry('1000x800')
 canva = Canvas(root, width=1000, height=800)
 canva.place(x=0,y=0)
