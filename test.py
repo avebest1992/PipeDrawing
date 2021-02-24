@@ -14,22 +14,22 @@ t.penup()
 t.setpos(-350, -100)
 t.pendown()
 
-def east():
+def north():
     t.seth(30)
     t.fd(40)
 def up():
     t.seth(90)
     t.fd(40)
-def north():
+def west():
     t.seth(150)
     t.fd(40)
-def west():
+def south():
     t.seth(210)
     t.fd(40)
 def down():
     t.seth(270)
     t.fd(40)
-def south():
+def east():
     t.seth(330)
     t.fd(40)
 def undo():t.undo()
@@ -68,18 +68,19 @@ def finish():
     falan()
     t.hideturtle()
 
-button_north = Button(root, text='北', command=north)
-button_north.place(x=663, y=580)
+
+button_west = Button(root, text='西', command=west)
+button_west.place(x=663, y=580)
 button_up = Button(root, text='上', command=up)
 button_up.place(x=726, y=540)
+button_north = Button(root, text='北', command=north)
+button_north.place(x=791, y=580)
 button_east = Button(root, text='东', command=east)
-button_east.place(x=791, y=580)
-button_south = Button(root, text='南', command=south)
-button_south.place(x=791, y=653)
+button_east.place(x=791, y=653)
 button_down = Button(root, text='下', command=down)
 button_down.place(x=726, y=693)
-button_west = Button(root, text='西', command=west)
-button_west.place(x=663, y=653)
+button_south = Button(root, text='南', command=south)
+button_south.place(x=663, y=653)
 button_undo = Button(root, text='撤销', command=undo)
 button_undo.place(x=865, y=580)
 button_falan = Button(root, text='法兰', command=falan)
@@ -88,7 +89,7 @@ button_famen = Button(root, text='阀门', command=famen)
 button_famen.place(x=470, y=710)
 button_finish = Button(root, text='结束', command=finish)
 button_finish.place(x=865, y=623)
-photo = PhotoImage(file = "six.gif")
+photo = PhotoImage(file="six.gif")
 label_photo = Label(root, image=photo, borderwidth=0)
 label_photo.place(x=741, y=635, anchor='center')
 

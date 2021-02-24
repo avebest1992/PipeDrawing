@@ -1,4 +1,4 @@
-# PipeDrawing
+﻿# PipeDrawing
 drawing tool for pressure pipes inspection
 # 单线图(轴测图)绘制工具
 
@@ -13,11 +13,11 @@ drawing tool for pressure pipes inspection
 
 ## 3. 待开发
 - save功能.
-- 网格线.
+- ~~网格线~~.
 - 测厚点.
 - 更多元件符号.
 - 分枝管道(三通).
-
+- 管线相交打断.
 ## 4. 憧憬
 1. 移植安卓app.
 2. 移植微信小程序.
