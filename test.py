@@ -156,12 +156,7 @@ def yibiao():
 # 功能区函数
 def biaoti():
     word = theScreen.textinput("标题","请输入标题内容")
-    pos = t.pos()
-    whgt(0, 250)
     t.write(word,align='center',font=("宋体",20,"bold"))
-    t.penup()
-    t.goto(pos)
-    t.pendown()
 def daduan():
     t.fd(15)
     t.penup()
@@ -212,7 +207,7 @@ button_southwest.place(x=663, y=633)
 # 功能按键区
 button_new_word=Button(root, text="添加文字", command=new_word).place(x=865, y=430)
 button_new=Button(root, text="新起点", command=new).place(x=865, y=465)
-button_biaoti = Button(root, text='点击添加标题',command=biaoti).pack()
+button_biaoti = Button(root, text='点击添加标题（先用新起点设定位置）',command=biaoti).pack()
 button_long = Button(root, text="远距离", command=long).place(x=865, y=500)
 button_daduan = Button(root, text="打断", command=daduan).place(x=865, y=535)
 button_undo = Button(root, text='撤销', command=t.undo).place(x=865, y=570)
