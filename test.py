@@ -17,22 +17,22 @@ t.pendown()
 
 def northeast():
     t.seth(30)
-    t.fd(40)
+    t.fd(20)
 def up():
     t.seth(90)
-    t.fd(40)
+    t.fd(20)
 def northwest():
     t.seth(150)
-    t.fd(40)
+    t.fd(20)
 def southwest():
     t.seth(210)
-    t.fd(40)
+    t.fd(20)
 def down():
     t.seth(270)
-    t.fd(40)
+    t.fd(20)
 def southeast():
     t.seth(330)
-    t.fd(40)
+    t.fd(20)
 def falan():
     t.lt(90)
     t.fd(5)
@@ -69,9 +69,9 @@ def famen():
     t.fd(10)
     t.back(5)
     t.right(90)
-def finish():
-    falan()
-    t.hideturtle()
+# def finish():
+#     falan()
+#     t.hideturtle()
 def biaoti():
     word = theScreen.textinput("标题","请输入标题内容")
     pos = t.pos()
@@ -82,8 +82,18 @@ def biaoti():
     t.penup()
     t.setposition(pos)
     t.pendown()
+def daduan():
+    t.fd(15)
+    t.penup()
+    t.fd(10)
+    t.pendown()
+    t.fd(15)
+def long():
+    length = theScreen.numinput("远距离","输入长度（目前每一步是20）")
+    t.fd(length)
 
-button_biaoti = Button(root, text='点击添加标题',command=biaoti).pack()
+
+# 移动按键区
 photo = PhotoImage(file="six.gif")
 label_photo = Label(root, image=photo, borderwidth=0)
 label_photo.place(x=741, y=615, anchor='center')
@@ -99,14 +109,18 @@ button_down = Button(root, text='下', command=down)
 button_down.place(x=726, y=673)
 button_southwest = Button(root, text='南', command=southwest)
 button_southwest.place(x=663, y=633)
-button_undo = Button(root, text='撤销', command=t.undo)
-button_undo.place(x=865, y=560)
+# 功能按键区
+button_biaoti = Button(root, text='点击添加标题',command=biaoti).pack()
+button_long = Button(root, text="远距离", command=long).place(x=865, y=500)
+button_daduan = Button(root, text="打断", command=daduan).place(x=865, y=530)
+button_undo = Button(root, text='撤销', command=t.undo).place(x=865, y=560)
+button_finish = Button(root, text='结束', command=t.hideturtle).place(x=865, y=600)
+# 元件符号区
 button_falan = Button(root, text='法兰', command=falan)
 button_falan.place(x=530, y=670)
 button_famen = Button(root, text='阀门', command=famen)
 button_famen.place(x=470, y=670)
-button_finish = Button(root, text='结束', command=finish)
-button_finish.place(x=865, y=600)
+
 
 
 
