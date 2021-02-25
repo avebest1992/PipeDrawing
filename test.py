@@ -47,7 +47,7 @@ def falan():
     t.fd(10)
     t.bk(5)
     t.rt(90)
-def famen():
+def xiaofamen():
     t.left(90)
     t.fd(5)
     t.back(10)
@@ -70,6 +70,30 @@ def famen():
     t.pendown()
     t.fd(10)
     t.back(5)
+    t.right(90)
+def dafamen():
+    t.left(90)
+    t.fd(10)
+    t.back(20)
+    t.penup()
+    t.right(90)
+    t.fd(3)
+    t.left(90)
+    t.pendown()
+    t.fd(20)
+    t.right(120)
+    t.fd(40)
+    t.left(120)
+    t.fd(20)
+    t.left(120)
+    t.fd(40)
+    t.penup()
+    t.right(210)
+    t.fd(37.64)
+    t.left(90)
+    t.pendown()
+    t.fd(20)
+    t.back(10)
     t.right(90)
 def ltob():
     pos1 = t.pos()
@@ -168,9 +192,10 @@ button_finish = Button(root, text='结束', command=t.hideturtle).place(x=865, y
 button_save=Button(root, text='保存',command=save).place(x=865, y=675)
 # 元件符号区
 button_falan = Button(root, text='法兰', command=falan).place(x=100, y=670)
-button_famen = Button(root, text='阀门', command=famen).place(x=150, y=670)
+button_xiaofamen = Button(root, text='小阀', command=xiaofamen).place(x=150, y=670)
+button_dafamen = Button(root, text='大阀', command=dafamen).place(x=150, y=640)
 button_ltob = Button(root, text="小大",command=ltob).place(x=200, y=670)
-button_btol = Button(root, text="大小",command=btol).place(x=250, y=670)
+button_btol = Button(root, text="大小",command=btol).place(x=200, y=640)
 
 
 theScreen.mainloop()
