@@ -15,6 +15,17 @@ t.speed(0)
 t.penup()
 t.setpos(-350, -100)
 t.pendown()
+# 便捷区函数
+def whfd(x):
+    # 无痕前进
+    t.penup()
+    t.forward(x)
+    t.pendown()
+def whgt(x, y):
+    # 无痕移位
+    t.penup()
+    t.goto(x, y)
+    t.pendown()
 # 移动区函数
 def northeast():
     t.seth(30)
@@ -131,6 +142,14 @@ def btol():
     t.goto(pos2)
     t.seth(angle)
     t.pendown()
+def yibiao():
+    t.fd(10)
+    xiaofamen()
+    t.fd(10)
+    t.rt(90)
+    t.circle(7)
+    t.lt(90)
+    whfd(14)
 # def finish():
 #     falan()
 #     t.hideturtle()
@@ -138,12 +157,10 @@ def btol():
 def biaoti():
     word = theScreen.textinput("标题","请输入标题内容")
     pos = t.pos()
-    t.penup()
-    t.setposition(0,250)
-    t.pendown()
+    whgt(0, 250)
     t.write(word,align='center',font=("宋体",20,"bold"))
     t.penup()
-    t.setposition(pos)
+    t.goto(pos)
     t.pendown()
 def daduan():
     t.fd(15)
@@ -155,7 +172,7 @@ def long():
     length = theScreen.numinput("远距离","输入长度（目前每一步是20）")
     t.fd(length)
 def start(event):
-    x, y = event.x-475, -event.y+350
+    x, y = event.x-476, -event.y+351
     t.penup()
     t.goto(x, y)
     t.pendown()
@@ -164,6 +181,17 @@ def new():
     root.bind("<Button-1>", start)
 def save():
     os.startfile("snip.exe")
+def word_action(event):
+    x, y = event.x-476, -event.y+351
+    t.penup()
+    t.goto(x, y)
+    t.pendown()
+    root.unbind("<Button-1>")
+    word = theScreen.textinput("添加文字", "请输入要添加的文字")
+    t.write(word, align='center', font=("宋体", 10))
+def new_word():
+    root.bind("<Button-1>", word_action)
+
 
 # 移动按键区
 photo = PhotoImage(file="six.gif")
@@ -182,6 +210,7 @@ button_down.place(x=726, y=673)
 button_southwest = Button(root, text='南', command=southwest)
 button_southwest.place(x=663, y=633)
 # 功能按键区
+button_new_word=Button(root, text="添加文字", command=new_word).place(x=865, y=430)
 button_new=Button(root, text="新起点", command=new).place(x=865, y=465)
 button_biaoti = Button(root, text='点击添加标题',command=biaoti).pack()
 button_long = Button(root, text="远距离", command=long).place(x=865, y=500)
@@ -196,7 +225,7 @@ button_xiaofamen = Button(root, text='小阀', command=xiaofamen).place(x=150, y
 button_dafamen = Button(root, text='大阀', command=dafamen).place(x=150, y=640)
 button_ltob = Button(root, text="小大",command=ltob).place(x=200, y=670)
 button_btol = Button(root, text="大小",command=btol).place(x=200, y=640)
-
+button_yibiao = Button(root, text="仪表", command=yibiao).place(x=250, y=670)
 
 theScreen.mainloop()
 root.mainloop()
