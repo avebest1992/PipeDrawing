@@ -199,13 +199,21 @@ def word_action(event):
 def new_word():
     root.bind("<Button-1>", word_action)
     canva['cursor']='crosshair'
-
+def manual_action(event):
+    x, y = event.x-476, -event.y+351
+    t.goto(x, y)
+    root.unbind("<Button-1>")
+    canva['cursor']='arrow'
+def manual():
+    root.bind("<Button-1>", manual_action)
+    canva['cursor']='crosshair'
 
 # 移动按键区
 photo = PhotoImage(file="six.gif")
 label_photo = Label(root, image=photo, borderwidth=0)
 label_photo.place(x=741, y=615, anchor='center')
 button_change_button = Button(root, text="更改坐标方向", command=change_button).pack(side='right')
+button_manual = Button(root, text="手动施法", command=manual).place(x=0, y=670)
 button_northeast = Button(root, text='北', command=northeast)
 button_southeast = Button(root, text='东', command=southeast)
 button_southwest = Button(root, text='南', command=southwest)
