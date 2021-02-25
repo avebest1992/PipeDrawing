@@ -10,6 +10,7 @@ drawing tool for pressure pipes inspection
 - 东南西北上下通过鼠标点击按钮绘制线条.
 - 撤销功能.
 - 点击按钮绘制阀门和法兰符号.
+- 点击按钮添加单线图标题
 
 ## 3. 待开发
 - save功能.
