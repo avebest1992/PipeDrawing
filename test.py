@@ -17,17 +17,23 @@ t.setpos(-350, -100)
 t.pendown()
 # 便捷区函数
 def whfd(x):
-    # 无痕前进
+    '''无痕前进'''
     t.penup()
     t.forward(x)
     t.pendown()
 def whgt(x, y):
-    # 无痕移位
+    '''无痕移位by坐标'''
     t.penup()
     t.goto(x, y)
     t.pendown()
+def whmv(pos):
+    '''无痕移位by位置'''
+    t.penup()
+    t.goto(pos)
+    t.pendown()
 # 移动区函数
 def change_button():
+    '''点击切换坐标系'''
     if button_northeast['text'] =="北":
         button_northeast['text'] = "东"
         button_southeast['text'] = "南"
@@ -59,25 +65,21 @@ def southeast():
 # 元件区函数
 def falan():
     t.lt(90)
-    t.fd(5)
-    t.bk(10)
-    t.penup()
+    t.fd(6)
+    t.bk(12)
     t.rt(90)
-    t.fd(3)
+    whfd(4)
     t.lt(90)
-    t.pendown()
-    t.fd(10)
-    t.bk(5)
+    t.fd(12)
+    t.bk(6)
     t.rt(90)
 def xiaofamen():
     t.left(90)
     t.fd(5)
     t.back(10)
-    t.penup()
     t.right(90)
-    t.fd(3)
+    whfd(3)
     t.left(90)
-    t.pendown()
     t.fd(10)
     t.right(120)
     t.fd(20)
@@ -85,11 +87,9 @@ def xiaofamen():
     t.fd(10)
     t.left(120)
     t.fd(20)
-    t.penup()
     t.right(210)
-    t.fd(20.32)
+    whfd(20.32)
     t.left(90)
-    t.pendown()
     t.fd(10)
     t.back(5)
     t.right(90)
@@ -97,11 +97,9 @@ def dafamen():
     t.left(90)
     t.fd(10)
     t.back(20)
-    t.penup()
     t.right(90)
-    t.fd(3)
+    whfd(3)
     t.left(90)
-    t.pendown()
     t.fd(20)
     t.right(120)
     t.fd(40)
@@ -109,11 +107,9 @@ def dafamen():
     t.fd(20)
     t.left(120)
     t.fd(40)
-    t.penup()
     t.right(210)
-    t.fd(37.64)
+    whfd(37.64)
     t.left(90)
-    t.pendown()
     t.fd(20)
     t.back(10)
     t.right(90)
@@ -131,10 +127,8 @@ def ltob():
     t.left(108.43)
     t.fd(15.81)
     t.goto(pos1)
-    t.penup()
-    t.goto(pos2)
+    whmv(pos2)
     t.seth(angle)
-    t.pendown()
 def btol():
     pos1 = t.pos()
     angle = t.heading()
@@ -149,10 +143,8 @@ def btol():
     t.left(71.57)
     t.fd(15.81)
     t.goto(pos1)
-    t.penup()
-    t.goto(pos2)
+    whmv(pos2)
     t.seth(angle)
-    t.pendown()
 def yibiao():
     t.fd(10)
     xiaofamen()
@@ -161,6 +153,18 @@ def yibiao():
     t.circle(7)
     t.lt(90)
     whfd(14)
+def gang():
+    t.left(90)
+    t.fd(7)
+    t.back(14)
+    t.fd(7)
+    t.right(90)
+def quan():
+    pos = t.pos()
+    t.back(5)
+    t.right(90)
+    t.circle(5)
+    whmv(pos)
 # def finish():
 #     falan()
 #     t.hideturtle()
@@ -170,18 +174,14 @@ def biaoti():
     t.write(word,align='center',font=("宋体",20,"bold"))
 def daduan():
     t.fd(15)
-    t.penup()
-    t.fd(10)
-    t.pendown()
+    whfd(10)
     t.fd(15)
 def long():
     length = theScreen.numinput("远距离","输入长度（目前每一步是20）")
     t.fd(length)
 def start(event):
     x, y = event.x-476, -event.y+351
-    t.penup()
-    t.goto(x, y)
-    t.pendown()
+    whgt(x, y)
     root.unbind("<Button-1>")
 def new():
     root.bind("<Button-1>", start)
@@ -189,9 +189,7 @@ def save():
     os.startfile("snip.exe")
 def word_action(event):
     x, y = event.x-476, -event.y+351
-    t.penup()
-    t.goto(x, y)
-    t.pendown()
+    whgt(x, y)
     root.unbind("<Button-1>")
     word = theScreen.textinput("添加文字", "请输入要添加的文字")
     t.write(word, align='center', font=("宋体", 10))
@@ -234,6 +232,8 @@ button_dafamen = Button(root, text='大阀', command=dafamen).place(x=150, y=640
 button_ltob = Button(root, text="小大",command=ltob).place(x=200, y=670)
 button_btol = Button(root, text="大小",command=btol).place(x=200, y=640)
 button_yibiao = Button(root, text="仪表", command=yibiao).place(x=250, y=670)
-
+button_gang = Button(root, text='画杠', command=gang).place(x=300, y=640)
+button_quan = Button(root, text='画圈', command=quan).place(x=300, y=670)
+# 逻辑结束
 theScreen.mainloop()
 root.mainloop()
