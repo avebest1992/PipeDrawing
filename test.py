@@ -183,8 +183,10 @@ def start(event):
     x, y = event.x-476, -event.y+351
     whgt(x, y)
     root.unbind("<Button-1>")
+    canva['cursor']='arrow'
 def new():
     root.bind("<Button-1>", start)
+    canva['cursor']='crosshair'
 def save():
     os.startfile("snip.exe")
 def word_action(event):
@@ -193,8 +195,10 @@ def word_action(event):
     root.unbind("<Button-1>")
     word = theScreen.textinput("添加文字", "请输入要添加的文字")
     t.write(word, align='center', font=("宋体", 10))
+    canva['cursor']='arrow'
 def new_word():
     root.bind("<Button-1>", word_action)
+    canva['cursor']='crosshair'
 
 
 # 移动按键区
