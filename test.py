@@ -1,5 +1,6 @@
 import turtle
 from tkinter import *
+import os
 
 # 初始化屏幕、画布、画笔
 root = Tk()
@@ -14,7 +15,7 @@ t.speed(0)
 t.penup()
 t.setpos(-350, -100)
 t.pendown()
-
+# 移动区函数
 def northeast():
     t.seth(30)
     t.fd(20)
@@ -33,6 +34,7 @@ def down():
 def southeast():
     t.seth(330)
     t.fd(20)
+# 元件区函数
 def falan():
     t.lt(90)
     t.fd(5)
@@ -72,6 +74,7 @@ def famen():
 # def finish():
 #     falan()
 #     t.hideturtle()
+# 功能区函数
 def biaoti():
     word = theScreen.textinput("标题","请输入标题内容")
     pos = t.pos()
@@ -99,7 +102,8 @@ def start(event):
     root.unbind("<Button-1>")
 def new():
     root.bind("<Button-1>", start)
-
+def save():
+    os.startfile("snip.exe")
 
 # 移动按键区
 photo = PhotoImage(file="six.gif")
@@ -125,6 +129,7 @@ button_daduan = Button(root, text="打断", command=daduan).place(x=865, y=535)
 button_undo = Button(root, text='撤销', command=t.undo).place(x=865, y=570)
 button_clear = Button(root, text="清屏", command=t.clear).place(x=865, y=605)
 button_finish = Button(root, text='结束', command=t.hideturtle).place(x=865, y=640)
+button_save=Button(root, text='保存',command=save).place(x=865, y=675)
 # 元件符号区
 button_falan = Button(root, text='法兰', command=falan)
 button_falan.place(x=530, y=670)
