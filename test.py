@@ -91,6 +91,14 @@ def daduan():
 def long():
     length = theScreen.numinput("远距离","输入长度（目前每一步是20）")
     t.fd(length)
+def start(event):
+    x, y = event.x-475, -event.y+350
+    t.penup()
+    t.goto(x, y)
+    t.pendown()
+    root.unbind("<Button-1>")
+def new():
+    root.bind("<Button-1>", start)
 
 
 # 移动按键区
@@ -110,11 +118,13 @@ button_down.place(x=726, y=673)
 button_southwest = Button(root, text='南', command=southwest)
 button_southwest.place(x=663, y=633)
 # 功能按键区
+button_new=Button(root, text="新起点", command=new).place(x=865, y=465)
 button_biaoti = Button(root, text='点击添加标题',command=biaoti).pack()
 button_long = Button(root, text="远距离", command=long).place(x=865, y=500)
-button_daduan = Button(root, text="打断", command=daduan).place(x=865, y=530)
-button_undo = Button(root, text='撤销', command=t.undo).place(x=865, y=560)
-button_finish = Button(root, text='结束', command=t.hideturtle).place(x=865, y=600)
+button_daduan = Button(root, text="打断", command=daduan).place(x=865, y=535)
+button_undo = Button(root, text='撤销', command=t.undo).place(x=865, y=570)
+button_clear = Button(root, text="清屏", command=t.clear).place(x=865, y=605)
+button_finish = Button(root, text='结束', command=t.hideturtle).place(x=865, y=640)
 # 元件符号区
 button_falan = Button(root, text='法兰', command=falan)
 button_falan.place(x=530, y=670)
