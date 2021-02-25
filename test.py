@@ -27,6 +27,17 @@ def whgt(x, y):
     t.goto(x, y)
     t.pendown()
 # 移动区函数
+def change_button():
+    if button_northeast['text'] =="北":
+        button_northeast['text'] = "东"
+        button_southeast['text'] = "南"
+        button_southwest['text'] = "西"
+        button_northwest['text'] = "北"
+    else:
+        button_northeast['text'] = "北"
+        button_southeast['text'] = "东"
+        button_southwest['text'] = "南"
+        button_northwest['text'] = "西"
 def northeast():
     t.seth(30)
     t.fd(20)
@@ -192,18 +203,19 @@ def new_word():
 photo = PhotoImage(file="six.gif")
 label_photo = Label(root, image=photo, borderwidth=0)
 label_photo.place(x=741, y=615, anchor='center')
+button_change_button = Button(root, text="更改坐标方向", command=change_button).pack(side='right')
+button_northeast = Button(root, text='北', command=northeast)
+button_southeast = Button(root, text='东', command=southeast)
+button_southwest = Button(root, text='南', command=southwest)
 button_northwest = Button(root, text='西', command=northwest)
 button_northwest.place(x=663, y=560)
+button_northeast.place(x=791, y=560)
+button_southeast.place(x=791, y=633)
+button_southwest.place(x=663, y=633)
 button_up = Button(root, text='上', command=up)
 button_up.place(x=726, y=520)
-button_northeast = Button(root, text='北', command=northeast)
-button_northeast.place(x=791, y=560)
-button_southeast = Button(root, text='东', command=southeast)
-button_southeast.place(x=791, y=633)
 button_down = Button(root, text='下', command=down)
 button_down.place(x=726, y=673)
-button_southwest = Button(root, text='南', command=southwest)
-button_southwest.place(x=663, y=633)
 # 功能按键区
 button_new_word=Button(root, text="添加文字", command=new_word).place(x=865, y=430)
 button_new=Button(root, text="新起点", command=new).place(x=865, y=465)
