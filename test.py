@@ -34,16 +34,11 @@ def whmv(pos):
 # 移动区函数
 def change_button():
     '''点击切换坐标系'''
-    if button_northeast['text'] =="北":
-        button_northeast['text'] = "东"
-        button_southeast['text'] = "南"
-        button_southwest['text'] = "西"
-        button_northwest['text'] = "北"
-    else:
-        button_northeast['text'] = "北"
-        button_southeast['text'] = "东"
-        button_southwest['text'] = "南"
-        button_northwest['text'] = "西"
+    temp = button_northeast['text']
+    button_northeast['text'] = button_southeast['text']
+    button_southeast['text'] = button_southwest['text']
+    button_southwest['text'] = button_northwest['text']
+    button_northwest['text'] = temp
 def northeast():
     t.seth(30)
     t.fd(20)
