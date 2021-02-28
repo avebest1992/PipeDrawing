@@ -199,9 +199,6 @@ def quan():
     whgt(pos)
 
 
-# def finish():
-#     falan()
-#     t.hideturtle()
 # 功能区函数
 def biaoti():
     word = theScreen.textinput("标题", "请输入标题内容")
@@ -212,6 +209,11 @@ def daduan():
     t.fd(15)
     whfd(10)
     t.fd(15)
+
+
+def eraser():
+    # TODO function eraser
+    pass
 
 
 def long():
