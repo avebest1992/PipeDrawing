@@ -18,6 +18,13 @@ t.pendown()
 
 
 # 便捷区函数
+def get_resource_path(relative_path):
+    """打包exe时资源文件的路径"""
+    if hasattr(sys, '_MEIPASS'):
+        return os.path.join(sys._MEIPASS, relative_path)
+    return os.path.join(os.path.abspath("."), relative_path)
+
+
 def whfd(x):
     """无痕前进"""
     t.penup()
@@ -234,7 +241,7 @@ def new():
 
 
 def save():
-    os.startfile("snip.exe")
+    os.startfile(get_resource_path("snip.exe"))
 
 
 def word_action(event):
@@ -264,7 +271,7 @@ def manual():
 
 
 # 移动按键区
-photo = PhotoImage(file="six.gif")
+photo = PhotoImage(file=get_resource_path("six.gif"))
 label_photo = Label(root, image=photo, borderwidth=0)
 label_photo.place(x=741, y=615, anchor='center')
 button_change_button = Button(root, text="更改坐标方向", command=change_button).pack(side='right')
