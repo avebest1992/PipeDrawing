@@ -5,7 +5,7 @@ import tkinter.messagebox
 from PIL import Image, ImageTk
 import os, time
 from sys import exit
-# from tkinter import ttk
+from tkinter import ttk
 
 """初始化屏幕、画布、画笔"""
 root = Tk()
@@ -348,6 +348,8 @@ photo_six = ImageTk.PhotoImage(Image.open(get_resource_path(r"icons\six.jpg")))
 label_photo = Label(canva, image=photo_six, borderwidth=0)
 label_photo.place(x=600,y=600,anchor='center')
 # 方向按钮
+# ttk.Style().configure("TButton", width=3, relief="groove",background="white",font=(10))
+# button_northeast = ttk.Button(canva, text='北', command=northeast)
 button_northeast = Button(canva, text='北', command=northeast, relief='groove',width=3,bg='white')
 button_southeast = Button(canva, text='东', command=southeast, relief='groove',width=3,bg='white')
 button_southwest = Button(canva, text='南', command=southwest, relief='groove',width=3,bg='white')
@@ -402,5 +404,7 @@ button_stamp = Button(frame_components, text="流向", command=t.stamp, relief='
 # 手动施法
 button_manual = Button(frame_components, text="手动施法", command=manual, relief='groove',bg='white').grid(row=1,column=5, padx=3)
 """逻辑结束"""
+# ttk.Style().configure("TButton", width=2, relief="groove",background="white")
+# button_test = ttk.Button(canva,text="上").place(x=500,y=500)
 theScreen.mainloop()
 root.mainloop()
