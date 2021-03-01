@@ -1,16 +1,18 @@
 import turtle
 from tkinter import *
 import tkinter.filedialog
+import tkinter.messagebox
 from PIL import Image, ImageTk
 import os, time
-from tkinter import ttk
+from sys import exit
+# from tkinter import ttk
 
 """初始化屏幕、画布、画笔"""
 root = Tk()
 root.title('单线图绘制-By 周啸天')
 root.geometry('950x700+0+0')
 canva = Canvas(root, width=950, height=700)
-canva.place(x=0, y=0)
+canva.pack()
 theScreen = turtle.TurtleScreen(canva)
 t = turtle.RawTurtle(theScreen)
 # 初始化龟龟位置
@@ -260,14 +262,24 @@ def new_action(event):
     canva['cursor'] = 'arrow'
 
 
-def new():
+def new(event=None):
     root.bind("<Button-1>", new_action)
     canva['cursor'] = 'crosshair'
 
 
-def save():
+def save(event=None):
     time.sleep(0.2)
     os.startfile(get_resource_path("snip.exe"))
+
+
+def quit(event=None):
+    answer = tkinter.messagebox.askyesnocancel(title="正在关闭程序", message="是否现在保存？")
+    if answer == True:
+        save()
+    elif answer == False:
+        exit()
+    else:
+        return
 
 
 def new_word_action(event):
@@ -301,10 +313,12 @@ menubar = Menu(root)
 root.config(menu=menubar)
 menu_files = Menu(menubar, tearoff=0)
 menu_files.add_command(label="导入图片", command=insert_image)
-menu_files.add_command(label="保 存", command=save)
-menu_files.add_command(label="退 出", command=root.quit)
+menu_files.add_command(label="保 存", command=save,accelerator='Ctrl+S')
+menu_files.add_command(label="退 出", command=quit, accelerator='Ctrl+Q')
 menubar.add_cascade(label="文 件", menu=menu_files)
 menu_edit = Menu(menubar, tearoff=1)
+menu_edit.add_command(label="点击上方虚线可取出菜单")
+menu_edit.add_separator()
 menu_edit.add_command(label="清 屏", command=t.clear)
 menu_edit.add_command(label="更改坐标", command=change_button)
 menu_edit.add_separator()
@@ -313,64 +327,80 @@ menu_edit.add_command(label="显示箭头", command=t.showturtle)
 menu_edit.add_separator()
 menu_edit.add_command(label="添加标题",command=biaoti)
 menu_edit.add_command(label="添加文字",command=new_word)
+menu_edit.add_separator()
+menu_edit.add_command(label="新起点",command=new, accelerator='Ctrl+X')
+menu_edit.add_command(label="远距离",command=long)
+menu_edit.add_separator()
+menu_edit.add_command(label="撤 销",command=t.undo, accelerator='Ctrl+Z')
 menubar.add_cascade(label="编 辑", menu=menu_edit)
+root.bind("<Control-s>", save)
+root.bind("<Control-q>", quit)
+root.bind("<Control-x>", lambda event:new())
+root.bind("<Control-z>", lambda event:t.undo())
 """移动按键区"""
-# 坐标图片
-photo = PhotoImage(file=get_resource_path("six.gif"))
-label_photo = Label(root, image=photo, borderwidth=0)
-label_photo.place(x=741, y=615, anchor='center')
 # 更改坐标
 # button_change_button = Button(root, text="更改坐标方向", command=change_button, relief='groove').pack(side='right')
-# 手动施法
-button_manual = Button(root, text="手动施法", command=manual, relief='groove').place(x=0, y=670)
+# 坐标框架
+# frame_move = Frame(canva,bg="red",relief="groove",height=150,width=150)
+# frame_move.place(relx=0.8,rely=0,anchor="center")
+# 坐标图片
+photo_six = ImageTk.PhotoImage(Image.open(get_resource_path(r"icons\six.jpg")))
+label_photo = Label(canva, image=photo_six, borderwidth=0)
+label_photo.place(x=600,y=600,anchor='center')
 # 方向按钮
-button_northeast = Button(root, text='北', command=northeast, relief='groove')
-button_southeast = Button(root, text='东', command=southeast, relief='groove')
-button_southwest = Button(root, text='南', command=southwest, relief='groove')
-button_northwest = Button(root, text='西', command=northwest, relief='groove')
-button_northwest.place(x=663, y=560)
-button_northeast.place(x=791, y=560)
-button_southeast.place(x=791, y=633)
-button_southwest.place(x=663, y=633)
-button_up = Button(root, text='上', command=up, relief='groove')
-button_up.place(x=726, y=520)
-button_down = Button(root, text='下', command=down, relief='groove')
-button_down.place(x=726, y=673)
+button_northeast = Button(canva, text='北', command=northeast, relief='groove',width=3,bg='white')
+button_southeast = Button(canva, text='东', command=southeast, relief='groove',width=3,bg='white')
+button_southwest = Button(canva, text='南', command=southwest, relief='groove',width=3,bg='white')
+button_northwest = Button(canva, text='西', command=northwest, relief='groove',width=3,bg='white')
+button_up = Button(canva, text='上', command=up, relief='groove',width=3,bg='white')
+button_down = Button(canva, text='下', command=down, relief='groove',width=3,bg='white')
+button_northeast.place(x=634, y=565)
+button_southeast.place(x=634, y=605)
+button_southwest.place(x=533, y=605)
+button_northwest.place(x=533, y=565)
+button_up.place(x=584, y=530)
+button_down.place(x=584, y=640)
 """功能按键区"""
 # button_new_word = Button(root, text="添加文字", command=new_word, relief='groove').place(x=865, y=430)
-button_new = Button(root, text="新起点", command=new, relief='groove').place(x=865, y=465)
+# button_new = Button(root, text="新起点", command=new, relief='groove').place(x=865, y=465)
 # button_biaoti = Button(root, text='点击添加标题（先用新起点设定位置）', command=biaoti, relief='groove').pack()
-button_long = Button(root, text="远距离", command=long, relief='groove').place(x=865, y=500)
-button_undo = Button(root, text='撤销', command=t.undo, relief='groove').place(x=865, y=570)
+# button_long = Button(root, text="远距离", command=long, relief='groove').place(x=865, y=500)
+# button_undo = Button(root, text='撤销', command=t.undo, relief='groove').place(x=865, y=570)
 # button_clear = Button(root, text="清屏", command=t.clear, relief='groove').place(x=865, y=605)
 # button_hide = Button(root, text='隐藏', command=t.hideturtle, relief='groove').place(x=865, y=640)
 # button_show = Button(root, text='显示', command=t.showturtle, relief='groove').place(x=900, y=640)
 # button_save = Button(root, text='保存', command=save, relief='groove').place(x=865, y=675)
 # button_insert_image = Button(root, text="插图", command=insert_image, relief='groove').place(x=900, y=675)
 """元件符号区"""
+frame_components = Frame(canva,borderwidth=1,bg='white',relief='groove')
+frame_components.place(x=100, y=600)
 # 起止符号
 icon_shape_s = ImageTk.PhotoImage(Image.open(get_resource_path(r"icons\icon_shape_s.jpg")))
-button_shape_s = Button(root, image=icon_shape_s, command=shape_s, relief='groove').place(x=100, y=640)
+button_shape_s = Button(frame_components, image=icon_shape_s, command=shape_s, relief='groove').grid(row=0,column=0, padx=3)
 # 法兰
 icon_falan = ImageTk.PhotoImage(Image.open(get_resource_path(r"icons\icon_falan.jpg")))
-button_falan = Button(root, image=icon_falan, command=falan, relief='groove').place(x=100, y=670)
+button_falan = Button(frame_components, image=icon_falan, command=falan, relief='groove').grid(row=1,column=0, padx=3)
 # 异径管
 icon_btol = ImageTk.PhotoImage(Image.open(get_resource_path(r"icons\icon_btol.jpg")))
-button_btol = Button(root, image=icon_btol, command=btol, relief='groove').place(x=150, y=640)
+button_btol = Button(frame_components, image=icon_btol, command=btol, relief='groove').grid(row=0,column=1, padx=3)
 icon_ltob = ImageTk.PhotoImage(Image.open(get_resource_path(r"icons\icon_ltob.jpg")))
-button_ltob = Button(root, image=icon_ltob, command=ltob, relief='groove').place(x=150, y=670)
+button_ltob = Button(frame_components, image=icon_ltob, command=ltob, relief='groove').grid(row=1,column=1, padx=3)
 # 测厚杠圈
 icon_gang = ImageTk.PhotoImage(Image.open(get_resource_path(r"icons\icon_gang.jpg")))
-button_gang = Button(root, image=icon_gang, command=gang, relief='groove').place(x=200, y=640)
+button_gang = Button(frame_components, image=icon_gang, command=gang, relief='groove').grid(row=0,column=2, padx=3)
 icon_quan = ImageTk.PhotoImage(Image.open(get_resource_path(r"icons\icon_quan.jpg")))
-button_quan = Button(root, image=icon_quan, command=quan, relief='groove').place(x=200, y=670)
+button_quan = Button(frame_components, image=icon_quan, command=quan, relief='groove').grid(row=1,column=2, padx=3)
 # 阀门
-button_xiaofamen = Button(root, text='小阀', command=xiaofamen, relief='groove').place(x=250, y=670)
-button_dafamen = Button(root, text='大阀', command=dafamen, relief='groove').place(x=250, y=640)
+button_xiaofamen = Button(frame_components, text='小阀', command=xiaofamen, relief='groove',bg='white').grid(row=0,column=3, padx=3)
+button_dafamen = Button(frame_components, text='大阀', command=dafamen, relief='groove',bg='white').grid(row=1,column=3, padx=3)
 # 仪表
-button_yibiao = Button(root, text="仪表", command=yibiao, relief='groove').place(x=300, y=640)
+button_yibiao = Button(frame_components, text="仪表", command=yibiao, relief='groove',bg='white').grid(row=0,column=4, padx=3)
 # 打断
-button_daduan = Button(root, text="打断", command=daduan, relief='groove').place(x=300, y=670)
+button_daduan = Button(frame_components, text="打断", command=daduan, relief='groove',bg='white').grid(row=1,column=4, padx=3)
+# 盖章
+button_stamp = Button(frame_components, text="流向", command=t.stamp, relief='groove',bg='white').grid(row=0,column=5, padx=3,sticky='w')
+# 手动施法
+button_manual = Button(frame_components, text="手动施法", command=manual, relief='groove',bg='white').grid(row=1,column=5, padx=3)
 """逻辑结束"""
 theScreen.mainloop()
 root.mainloop()
