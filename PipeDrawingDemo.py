@@ -1,5 +1,7 @@
 import turtle
 from tkinter import *
+import tkinter.filedialog
+from PIL import Image, ImageTk
 import os
 
 # 初始化屏幕、画布、画笔
@@ -213,10 +215,15 @@ def biaoti():
     word = theScreen.textinput("标题", "请输入标题内容")
     t.write(word, align='center', font=("宋体", 20, "bold"))
 
-
+image_tb_inserted = None
+im = None
 def insert_image():
-    # TODO insert image function
-    pass
+    global image_tobe_inserted,im
+    file_path = tkinter.filedialog.askopenfilename(title="选择要插入的图片")
+    x, y = t.xcor(), -t.ycor()
+    image_tb_inserted = Image.open(file_path)
+    im = ImageTk.PhotoImage(image_tb_inserted)
+    canva.create_image(x, y, image=im)
 
 
 def daduan():
@@ -306,6 +313,7 @@ button_clear = Button(root, text="清屏", command=t.clear).place(x=865, y=605)
 button_hide = Button(root, text='隐藏', command=t.hideturtle).place(x=865, y=640)
 button_show = Button(root, text='显示', command=t.showturtle).place(x=900, y=640)
 button_save = Button(root, text='保存', command=save).place(x=865, y=675)
+button_insert_image = Button(root, text="插图", command=insert_image).place(x=900, y=675)
 # 元件符号区
 button_shape_s = Button(root, text='起止', command=shape_s).place(x=100, y=640)
 button_falan = Button(root, text='法兰', command=falan).place(x=100, y=670)
