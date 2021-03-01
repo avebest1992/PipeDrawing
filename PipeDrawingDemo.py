@@ -191,9 +191,11 @@ def btol():
 
 def yibiao():
     xiaofamen()
+    angle = t.heading()
     t.fd(10)
     t.rt(90)
     t.circle(7)
+    t.circle(7, 90-angle)
     word = theScreen.textinput("添加文字", "请输入字母")
     t.write(word, align='center', font=("宋体", 10, 'normal'))
 
@@ -212,7 +214,7 @@ def biaoti():
     t.write(word, align='center', font=("宋体", 20, "bold"))
 
 
-def insert_image()
+def insert_image():
     # TODO insert image function
     pass
 
