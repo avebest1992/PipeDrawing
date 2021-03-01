@@ -212,6 +212,11 @@ def biaoti():
     t.write(word, align='center', font=("宋体", 20, "bold"))
 
 
+def insert_image()
+    # TODO insert image function
+    pass
+
+
 def daduan():
     t.fd(15)
     whfd(10)
