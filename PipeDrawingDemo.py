@@ -283,7 +283,7 @@ def quit(event=None):
 
 
 def new_word_action(event):
-    x, y = event.x - 476, -event.y + 351
+    x, y = event.x - 475.00, -event.y + 350.00
     whgt(x, y)
     root.unbind("<Button-1>")
     word = theScreen.textinput("添加文字", "请输入要添加的文字")
@@ -291,7 +291,7 @@ def new_word_action(event):
     canva['cursor'] = 'arrow'
 
 
-def new_word():
+def new_word(event=None):
     root.bind("<Button-1>", new_word_action)
     canva['cursor'] = 'crosshair'
 
@@ -306,6 +306,10 @@ def manual_action(event):
 def manual():
     root.bind("<Button-1>", manual_action)
     canva['cursor'] = 'crosshair'
+
+
+def help():
+    os.startfile(get_resource_path("使用说明.txt"))
 
 
 """顶部菜单区"""
@@ -326,15 +330,19 @@ menu_edit.add_command(label="隐藏箭头", command=t.hideturtle)
 menu_edit.add_command(label="显示箭头", command=t.showturtle)
 menu_edit.add_separator()
 menu_edit.add_command(label="添加标题",command=biaoti)
-menu_edit.add_command(label="添加文字",command=new_word)
+menu_edit.add_command(label="添加文字",command=new_word, accelerator='Ctrl+W')
 menu_edit.add_separator()
 menu_edit.add_command(label="新起点",command=new, accelerator='Ctrl+X')
 menu_edit.add_command(label="远距离",command=long)
 menu_edit.add_separator()
 menu_edit.add_command(label="撤 销",command=t.undo, accelerator='Ctrl+Z')
 menubar.add_cascade(label="编 辑", menu=menu_edit)
+menu_help = Menu(menubar, tearoff=0)
+menu_help.add_command(label="使用说明",command=help)
+menubar.add_cascade(label="帮 助", menu=menu_help)
 root.bind("<Control-s>", save)
 root.bind("<Control-q>", quit)
+root.bind("<Control-w>", new_word)
 root.bind("<Control-x>", lambda event:new())
 root.bind("<Control-z>", lambda event:t.undo())
 """移动按键区"""
