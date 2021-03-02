@@ -45,6 +45,37 @@ def whgt(x, y=None):
 
 
 """移动区函数"""
+location = []
+location_count = 0
+def set_location():
+    global location
+    location.append(t.pos())
+    t.shape('turtle')
+    t.color('blue')
+    t.stamp()
+    t.color('black')
+    t.shape('classic')
+
+
+def goto_location():
+    global location, location_count
+    if len(location) == 0:
+        tkinter.messagebox.showinfo(title="提示",message="现在还没有定位，点击编辑菜单->添加定位")
+    elif location_count<len(location):
+        whgt(location[location_count])
+        location_count += 1
+    else:
+        location_count = 1
+        whgt(location[0])
+
+
+def clear_location():
+    global location, location_count
+    t.clearstamps()
+    location.clear()
+    location_count = 0
+
+
 def change_button():
     # 点击切换坐标系
     temp = button_northeast['text']
@@ -336,6 +367,10 @@ menu_edit.add_command(label="新起点",command=new, accelerator='Ctrl+X')
 menu_edit.add_command(label="远距离",command=long)
 menu_edit.add_separator()
 menu_edit.add_command(label="撤 销",command=t.undo, accelerator='Ctrl+Z')
+menu_edit.add_separator()
+menu_edit.add_command(label="添加标记",command=set_location)
+menu_edit.add_command(label="定位标记",command=goto_location)
+menu_edit.add_command(label="清除标记",command=clear_location)
 menubar.add_cascade(label="编 辑", menu=menu_edit)
 menu_help = Menu(menubar, tearoff=0)
 menu_help.add_command(label="使用说明",command=help)
