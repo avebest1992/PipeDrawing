@@ -47,12 +47,14 @@ def whgt(x, y=None):
 """移动区函数"""
 location = []
 location_count = 0
+location_id = []
 def set_location():
-    global location
+    global location, location_id
     location.append(t.pos())
     t.shape('turtle')
     t.color('blue')
-    t.stamp()
+    stampid = t.stamp()
+    location_id.append(stampid)
     t.color('black')
     t.shape('classic')
 
@@ -70,19 +72,26 @@ def goto_location():
 
 
 def clear_location():
-    global location, location_count
-    t.clearstamps()
+    global location, location_count, location_id
+    for i in range(len(location_id)):
+        t.clearstamp(location_id[i])
     location.clear()
     location_count = 0
+    location_id.clear()
 
-
+word_ne, word_se, word_sw, word_nw = "北", "东", "南", "西"
 def change_button():
     # 点击切换坐标系
-    temp = button_northeast['text']
-    button_northeast['text'] = button_southeast['text']
-    button_southeast['text'] = button_southwest['text']
-    button_southwest['text'] = button_northwest['text']
-    button_northwest['text'] = temp
+    global word_ne, word_se, word_sw, word_nw
+    temp = word_ne
+    word_ne = word_se
+    word_se = word_sw
+    word_sw = word_nw
+    word_nw = temp
+    button_northeast.config(text=word_ne+'E')
+    button_southeast.config(text=word_se+'D')
+    button_southwest.config(text=word_sw+'A')
+    button_northwest.config(text=word_nw+'Q')
 
 
 def northeast():
@@ -197,32 +206,32 @@ def dafamen():
 
 def ltob():
     t.rt(90)
-    t.fd(5)
+    t.fd(3)
     t.left(71.57)
-    t.fd(15.81)
+    t.fd(9.49)
     t.left(108.43)
-    t.fd(20)
+    t.fd(12)
     t.left(108.43)
-    t.fd(15.81)
+    t.fd(9.49)
     t.left(71.57)
-    t.fd(5)
+    t.fd(3)
     t.left(90)
-    whfd(15)
+    whfd(9)
 
 
 def btol():
     t.rt(90)
-    t.fd(10)
+    t.fd(6)
     t.left(108.43)
-    t.fd(15.81)
+    t.fd(9.49)
     t.left(71.57)
-    t.fd(10)
+    t.fd(6)
     t.left(71.57)
-    t.fd(15.81)
+    t.fd(9.49)
     t.left(108.43)
-    t.fd(10)
+    t.fd(6)
     t.left(90)
-    whfd(15)
+    whfd(9)
 
 
 def yibiao():
@@ -242,6 +251,12 @@ def quan():
     t.right(90)
     t.circle(5)
     whgt(pos)
+
+
+def daduan():
+    t.fd(15)
+    whfd(10)
+    t.fd(15)
 
 
 """功能区函数"""
@@ -268,12 +283,6 @@ def insert_image():
     image_tb_inserted = Image.open(file_path)
     im = ImageTk.PhotoImage(image_tb_inserted)
     canva.create_image(x, y, image=im)
-
-
-def daduan():
-    t.fd(15)
-    whfd(10)
-    t.fd(15)
 
 
 def eraser():
@@ -313,12 +322,19 @@ def quit(event=None):
         return
 
 
+new_word_size = 12
+def change_word_size():
+    global new_word_size
+    new_word_size = int(theScreen.numinput(title="更改字号",prompt=f"请输入字号（当前是{new_word_size}）：",default=12))
+
+
 def new_word_action(event):
     x, y = event.x - 475.00, -event.y + 350.00
     whgt(x, y)
     root.unbind("<Button-1>")
+    global new_word_size
     word = theScreen.textinput("添加文字", "请输入要添加的文字")
-    t.write(word, align='center', font=("宋体", 10, 'normal'))
+    t.write(word, align='center', font=("宋体", new_word_size, 'normal'))
     canva['cursor'] = 'arrow'
 
 
@@ -362,6 +378,7 @@ menu_edit.add_command(label="显示箭头", command=t.showturtle)
 menu_edit.add_separator()
 menu_edit.add_command(label="添加标题",command=biaoti)
 menu_edit.add_command(label="添加文字",command=new_word, accelerator='Ctrl+W')
+menu_edit.add_command(label="更改字号",command=change_word_size)
 menu_edit.add_separator()
 menu_edit.add_command(label="新起点",command=new, accelerator='Ctrl+X')
 menu_edit.add_command(label="远距离",command=long)
@@ -375,11 +392,18 @@ menubar.add_cascade(label="编 辑", menu=menu_edit)
 menu_help = Menu(menubar, tearoff=0)
 menu_help.add_command(label="使用说明",command=help)
 menubar.add_cascade(label="帮 助", menu=menu_help)
+# 快捷键绑定区
 root.bind("<Control-s>", save)
 root.bind("<Control-q>", quit)
 root.bind("<Control-w>", new_word)
 root.bind("<Control-x>", lambda event:new())
 root.bind("<Control-z>", lambda event:t.undo())
+root.bind("<w>", lambda event:up())
+root.bind("<s>", lambda event:down())
+root.bind("<e>", lambda event:northeast())
+root.bind("<d>", lambda event:southeast())
+root.bind("<a>", lambda event:southwest())
+root.bind("<q>", lambda event:northwest())
 """移动按键区"""
 # 更改坐标
 # button_change_button = Button(root, text="更改坐标方向", command=change_button, relief='groove').pack(side='right')
@@ -393,12 +417,12 @@ label_photo.place(x=600,y=600,anchor='center')
 # 方向按钮
 # ttk.Style().configure("TButton", width=3, relief="groove",background="white",font=(10))
 # button_northeast = ttk.Button(canva, text='北', command=northeast)
-button_northeast = Button(canva, text='北', command=northeast, relief='groove',width=3,bg='white')
-button_southeast = Button(canva, text='东', command=southeast, relief='groove',width=3,bg='white')
-button_southwest = Button(canva, text='南', command=southwest, relief='groove',width=3,bg='white')
-button_northwest = Button(canva, text='西', command=northwest, relief='groove',width=3,bg='white')
-button_up = Button(canva, text='上', command=up, relief='groove',width=3,bg='white')
-button_down = Button(canva, text='下', command=down, relief='groove',width=3,bg='white')
+button_northeast = Button(canva, text=word_ne+'E', command=northeast, relief='groove',width=3,bg='white')
+button_southeast = Button(canva, text=word_se+'D', command=southeast, relief='groove',width=3,bg='white')
+button_southwest = Button(canva, text=word_sw+'A', command=southwest, relief='groove',width=3,bg='white')
+button_northwest = Button(canva, text=word_nw+'Q', command=northwest, relief='groove',width=3,bg='white')
+button_up = Button(canva, text='上W', command=up, relief='groove',width=3,bg='white')
+button_down = Button(canva, text='下S', command=down, relief='groove',width=3,bg='white')
 button_northeast.place(x=634, y=565)
 button_southeast.place(x=634, y=605)
 button_southwest.place(x=533, y=605)
