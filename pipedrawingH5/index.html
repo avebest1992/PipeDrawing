@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
     <title>单线图在线绘制工具</title>
 </head>
 <body>
@@ -12,14 +12,37 @@
     <br>
     <table>
         <tr>
-        <td><button id="northeast" style="margin: 5px 5px 5px 5px;" onclick="button_ne()">北</button></td>
-        <td><button id="southeast" style="margin: 5px 5px 5px 5px;" onclick="button_se()">东</button></td>
-        <td><button id="southwest" style="margin: 5px 5px 5px 5px;" onclick="button_sw()">南</button></td>
+            <td></td>
+            <td><button id="up" style="margin: 5px 5px 5px 5px;" onclick="button_up()">上</button></td>
         </tr>
         <tr>
-        <td><button id="northwest" style="margin: 5px 5px 5px 5px;" onclick="button_nw()">西</button></td>
-        <td><button id="up" style="margin: 5px 5px 5px 5px;" onclick="button_up()">上</button></td>
-        <td><button id="down" style="margin: 5px 5px 5px 5px;" onclick="button_dn()">下</button></td>
+            <td><button id="northwest" style="margin: 5px 5px 5px 5px;" onclick="button_nw()">西</button></td>
+            <td></td>
+<!--            <td><button id="up" style="margin: 5px 5px 5px 5px;" onclick="button_up()">上</button></td>-->
+            <td><button id="northeast" style="margin: 5px 5px 5px 5px;" onclick="button_ne()">北</button></td>
+            <td>
+                <label for="x_slider">设置横坐标：</label>
+                <input id="x_slider" type="range" min="0" max="500" step="1" value="0" oninput="show_XY()" />
+            </td>
+            <td>设置指针坐标为</td>
+            <td><span id="show_XY">( 0 , 0 )</span></td>
+        </tr>
+        <tr>
+            <td><button id="southwest" style="margin: 5px 5px 5px 5px;" onclick="button_sw()">南</button></td>
+            <td></td>
+<!--            <td><button id="down" style="margin: 5px 5px 5px 5px;" onclick="button_dn()">下</button></td>-->
+            <td><button id="southeast" style="margin: 5px 5px 5px 5px;" onclick="button_se()">东</button></td>
+            <td>
+                <label for="y_slider">设置纵坐标：</label>
+                <input id="y_slider" type="range" min="0" max="500" step="1" value="0" oninput="show_XY()" />
+            </td>
+            <td>
+                <button id="set_XY" onclick="set_XY()">确定</button>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><button id="down" style="margin: 5px 5px 5px 5px;" onclick="button_dn()">下</button></td>
         </tr>
     </table>
     <table style="margin-top: 20px;">
