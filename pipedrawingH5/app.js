@@ -6,8 +6,8 @@ const button_sw = document.getElementById("southwest")
 const button_nw = document.getElementById("northwest")
 const button_up = document.getElementById("up")
 const button_down = document.getElementById("down")
-let nowX = 400;
-let nowY = 300;
+let nowX = 100;
+let nowY = 500;
 button_ne.onclick = function (){
     ctx.moveTo(nowX, nowY);
     nowX += 17.32;
