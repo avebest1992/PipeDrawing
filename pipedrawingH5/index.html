@@ -10,14 +10,27 @@
         您的浏览器不支持html5，请用IE9以上或Chrome浏览器打开
     </canvas>
     <br>
-    <button id="northeast">北</button>
-    <button id="southeast">东</button>
-    <button id="southwest">南</button>
-    <button id="northwest">西</button>
-    <button id="up">上</button>
-    <button id="down">下</button>
-    <script src="app.js"></script>
+    <table>
+        <tr>
+        <td><button id="northeast" style="margin: 5px 5px 5px 5px;">北</button></td>
+        <td><button id="southeast" style="margin: 5px 5px 5px 5px;">东</button></td>
+        <td><button id="southwest" style="margin: 5px 5px 5px 5px;">南</button></td>
+        </tr>
+        <tr>
+        <td><button id="northwest" style="margin: 5px 5px 5px 5px;">西</button></td>
+        <td><button id="up" style="margin: 5px 5px 5px 5px;">上</button></td>
+        <td><button id="down" style="margin: 5px 5px 5px 5px;">下</button></td>
+        </tr>
+    </table>
+    <table style="margin-top: 20px;">
+        <tr><td><button id="stamp">添加标记</button></td></tr>
+        <tr><td><button id="goto_stamp" style="margin-top: 5px;">定位标记</button></td></tr>
+        <tr><td><button id="clear_stamp" style="margin-top: 5px;">清除标记</button></td></tr>
+    </table>
 </body>
 <br>
 <a href="help.html">查看使用说明</a>
+<footer>
+    <script src="app.js"></script>
+</footer>
 </html>
