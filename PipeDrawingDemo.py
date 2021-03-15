@@ -359,6 +359,16 @@ def help():
     os.startfile(get_resource_path("使用说明.txt"))
 
 
+# def senior():
+#     senior_window = tkinter.Toplevel()
+#     turtle_coordinate_pic = Image.open(get_resource_path(r"\icons\t_coor.png"))
+#     t_coor = ImageTk.PhotoImage(turtle_coordinate_pic)
+#     canvas_coor = tkinter.Canvas(senior_window,width=turtle_coordinate_pic.width,height=turtle_coordinate_pic.height)
+#     canvas_coor.create_image(0,0,image=t_coor)
+#     canvas_coor.pack()
+#     senior_window.mainloop()
+#
+
 """顶部菜单区"""
 menubar = Menu(root)
 root.config(menu=menubar)
@@ -391,6 +401,7 @@ menu_edit.add_command(label="清除标记",command=clear_location)
 menubar.add_cascade(label="编 辑", menu=menu_edit)
 menu_help = Menu(menubar, tearoff=0)
 menu_help.add_command(label="使用说明",command=help)
+# menu_help.add_command(label="高级模式",command=senior)
 menubar.add_cascade(label="帮 助", menu=menu_help)
 # 快捷键绑定区
 root.bind("<Control-s>", save)
